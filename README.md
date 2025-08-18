@@ -1,1 +1,1 @@
-# ruby-finance-calculator
+# Ruby Finance Calculator
