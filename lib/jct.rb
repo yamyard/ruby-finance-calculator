@@ -15,7 +15,11 @@
 require 'date'
 require 'bigdecimal'
 require 'bigdecimal/util'
-require 'jct/version'
+# --- BEGIN MODIFICATION (yamyard, 2025-08-19) ---
+# Commented out the original author's version reference, while the original version was 0.3.1.
+# require 'jct/version'
+# --- END MODIFICATION ---
+
 
 module Jct
   extend self
