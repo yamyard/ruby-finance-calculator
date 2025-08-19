@@ -5,8 +5,23 @@
 A financial calculator implemented in Ruby.
 
 ## Features
-
- - Japanese Tax Calculator
+- Currency Calculator
+  - Conversion
+  - Inflation Adjusted Value
+- Interest Calculator
+  - Simple Interest
+  - Compound Interest
+  - Future Value of Annuity
+- Investment Calculator
+  - Return on Investment (ROI)
+  - Compound Annual Growth Rate (CAGR)
+- Japanese Tax Calculator
+  - Amount with Tax
+  - Yearly Amount with Tax
+  - Amount Separated by Rate
+- Loan Calculator
+  - Equated Monthly Installment (EMI)
+  - Total Interest Payable
 
 ## Usage Instructons
 
