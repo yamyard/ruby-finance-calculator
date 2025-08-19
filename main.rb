@@ -130,13 +130,13 @@ begin
           puts "CAGR: #{Investment.cagr(final, initial, periods)}"
 		  puts ""
 		# JCT
-        when "JCT Amount with Tax"
+        when "JCT - Amount with Tax"
           amount = input_number("Enter amount: ")
 		  date = input_date("Enter date (YYYY-MM-DD, leave empty for today): ", allow_empty: true)
           result = Jct.amount_with_tax(amount, date: date)
           puts "Amount with Tax: #{result}"
 		  puts ""
-        when "JCT Yearly Amount with Tax"
+        when "JCT - Yearly Amount with Tax"
           amount = input_number("Enter amount: ")
 		  amount = Rational(amount)
           start_on = input_date("Enter start date (YYYY-MM-DD): ", allow_empty: true)
@@ -144,7 +144,7 @@ begin
           result = Jct.yearly_amount_with_tax(amount: amount, start_on: start_on, end_on: end_on)
           puts "Yearly Amount with Tax: #{result}"
 		  puts ""
-        when "JCT Amount Separated by Rate"
+        when "JCT - Amount Separated by Rate"
           amount = input_number("Enter amount: ")
           amount = Rational(amount)
 		  start_on = input_date("Enter start date (YYYY-MM-DD): ", allow_empty: true)
