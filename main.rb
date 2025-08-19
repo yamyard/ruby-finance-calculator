@@ -3,12 +3,26 @@ require 'bigdecimal'
 require 'date'
 require 'io/console'
 
+require_relative "lib/currency"
+require_relative "lib/interest"
+require_relative "lib/investment"
 require_relative 'lib/jct'
+require_relative "lib/loan"
+
 
 MENU_OPTIONS = [
-  "JCT Amount with Tax",
-  "JCT Yearly Amount with Tax",
-  "JCT Amount Separated by Rate",
+  "Currency - Conversion",
+  "Currency - Inflation Adjusted Value",
+  "Interest - Simple Interest",
+  "Interest - Compound Interest",
+  "Interest - Future Value of Annuity",
+  "Investment - Return on Investment (ROI)",
+  "Investment - Compound Annual Growth Rate (CAGR)",
+  "JCT - Amount with Tax",
+  "JCT - Yearly Amount with Tax",
+  "JCT - Amount Separated by Rate",
+  "Loan - Equated Monthly Installment (EMI)",
+  "Loan - Total Interest Payable",
   "Exit"
 ]
 
@@ -71,6 +85,51 @@ begin
       when "\r"
         puts "\n------------------"
         case MENU_OPTIONS[selected_index]
+		# Currency
+		when "Currency - Conversion"
+          amount = input_number("Amount: ")
+          rate = input_number("Conversion Rate: ")
+          puts "Converted Amount: #{Currency.currency_conversion(amount, rate)}"
+		  puts ""
+        when "Currency - Inflation Adjusted Value"
+          amount = input_number("Amount: ")
+          rate = input_number("Annual Inflation Rate (0.02 for 2%): ")
+          years = input_number("Number of Years: ")
+          puts "Inflation Adjusted Value: #{Currency.inflation_adjusted_value(amount, rate, years)}"
+		  puts ""
+		# Interest
+        when "Interest - Simple Interest"
+          p = input_number("Principal: ")
+          r = input_number("Annual Rate (0.02 for 2%): ")
+          t = input_number("Years: ")
+          puts "Simple Interest: #{Interest.simple_interest(p,r,t)}"
+		  puts ""
+        when "Interest - Compound Interest"
+          p = input_number("Principal: ")
+          r = input_number("Annual Rate (0.02 for 2%): ")
+          t = input_number("Years: ")
+          n = input_number("Compounding times per year (default 1): ")
+          puts "Compound Interest: #{Interest.compound_interest(p,r,t,n)}"
+		  puts ""
+        when "Interest - Future Value of Annuity"
+          payment = input_number("Periodic Payment: ")
+          rate = input_number("Annual Rate (0.02 for 2%): ")
+          n_periods = input_number("Number of periods: ")
+          puts "Future Value of Annuity: #{Interest.future_value_annuity(payment, rate, n_periods)}"
+		  puts ""
+		# Investment
+        when "Investment - Return on Investment (ROI)"
+          initial = input_number("Initial Investment: ")
+          final = input_number("Final Value: ")
+          puts "ROI: #{Investment.roi(final, initial)}"
+		  puts ""
+        when "Investment - Compound Annual Growth Rate (CAGR)"
+          initial = input_number("Initial Investment: ")
+          final = input_number("Final Value: ")
+          periods = input_number("Number of Years: ")
+          puts "CAGR: #{Investment.cagr(final, initial, periods)}"
+		  puts ""
+		# JCT
         when "JCT Amount with Tax"
           amount = input_number("Enter amount: ")
 		  date = input_date("Enter date (YYYY-MM-DD, leave empty for today): ", allow_empty: true)
@@ -96,6 +155,22 @@ begin
             puts "  Tax rate #{((rate - 1) * 100).to_i}%: #{amt}"
           end
 		  puts ""
+		# Loan
+        when "Loan - Equated Monthly Installment (EMI)"
+          principal = input_number("Loan Principal: ")
+          rate = input_number("Annual Rate (0.015 for 1.5%): ")
+          years = input_number("Loan Period in Years: ")
+          emi = Loan.emi(principal, rate, years)
+          puts "EMI: #{emi}"
+		  puts ""
+        when "Loan - Total Interest Payable"
+          principal = input_number("Loan Principal: ")
+          rate = input_number("Annual Rate (0.015 for 1.5%): ")
+          years = input_number("Loan Period in Years: ")
+          emi = Loan.emi(principal, rate, years)
+          puts "Total Interest Payable: #{Loan.total_interest(principal, emi, years)}"
+		  puts ""
+		# Exit
         when "Exit"
           puts "Exited."
           exit
